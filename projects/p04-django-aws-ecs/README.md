@@ -5,7 +5,7 @@ Fargate. It models the application, renders an ECS task definition, and emits a
 Terraform module that creates the cluster, service, log group and CPU-based
 autoscaling. No AWS account is required to use this project.
 
-Topic note: inspired by DevOps-Projects (project-07-django-deploy-ecs, MIT,
+Topic note: inspired by DevOps-Projects (project-04-django-aws-ecs, MIT,
 DevCloudNinjas). The implementation is original and the theme ("Django on ECS
 Fargate") is shared with the referenced DevOps-Projects project.
 

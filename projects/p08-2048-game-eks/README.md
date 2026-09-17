@@ -5,10 +5,11 @@ terminal-friendly CLI smoke check, an HTTP server with a browser UI, and
 Kubernetes manifests (Deployment, Service, Ingress) to run the containerized
 game on Amazon EKS.
 
-Topic note: inspired by DevOps-Projects (project-11-2048-game-eks, MIT,
+Topic note: inspired by DevOps-Projects (project-08-2048-game-eks, MIT,
 DevCloudNinjas). The game implementation, engine and manifests here are
 original; only the theme (the 2048 game deployed to EKS) matches the
-referenced DevOps-Projects project.
+referenced DevOps-Projects project. The tile color palette follows the classic
+2048 visual style as a nod to the original game.
 
 ## What it does
 

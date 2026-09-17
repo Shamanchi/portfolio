@@ -5,7 +5,7 @@ through a Jenkins declarative pipeline. It models the release flow (build,
 push, deploy, rollout), renders a Jenkinsfile, and generates Kubernetes
 Deployment + Service manifests.
 
-Topic note: inspired by DevOps-Projects (project-08-docker-jenkins-k8s, MIT,
+Topic note: inspired by DevOps-Projects (project-05-docker-jenkins-k8s, MIT,
 DevCloudNinjas). The implementation is original; the "container image through
 Jenkins into Kubernetes" theme matches the referenced project.
 

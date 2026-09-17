@@ -4,7 +4,7 @@ Original generator for an advanced CI/CD pipeline: quality gates, secret scan,
 SBOM export, immutable image build, and a deployment that only starts after an
 approval-protected environment review. Renders GitHub Actions workflows.
 
-Topic note: inspired by DevOps-Projects (project-09-advanced-cicd-pipeline,
+Topic note: inspired by DevOps-Projects (project-06-advanced-cicd-pipeline,
 MIT, DevCloudNinjas). The implementation is original and follows the same
 theme: a hardened pipeline with gates before release.
 

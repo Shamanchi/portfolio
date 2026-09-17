@@ -5,7 +5,7 @@ module (azurerm) that provisions a cluster with a system node pool and
 autoscaler, plus a guarded Azure DevOps pipeline with validate, plan and an
 approval-gated apply.
 
-Topic note: inspired by DevOps-Projects (project-10-azure-devops-aks-terraform,
+Topic note: inspired by DevOps-Projects (project-07-azure-devops-aks-terraform,
 MIT, DevCloudNinjas). The implementation is original and matches the theme:
 Terraform-driven AKS behind an Azure DevOps approval gate.
 
