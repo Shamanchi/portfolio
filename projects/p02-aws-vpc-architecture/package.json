@@ -1,0 +1,20 @@
+{
+  "name": "p02-aws-vpc-architecture",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AWS VPC architecture as code: multi-AZ subnet planning, NAT and route tables, Terraform HCL rendering.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p .",
+    "test": "node --test \"tests/**/*.test.ts\"",
+    "verify": "npm run typecheck && npm test",
+    "cli": "node src/cli.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.3",
+    "typescript": "^7.0.2"
+  }
+}
