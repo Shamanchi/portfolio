@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Watch catalog</title>
+<style>
+  body { font-family: sans-serif; max-width: 640px; margin: 2rem auto; color: #222; }
+  ul { list-style: none; padding: 0; }
+  li { background: #f4f4f4; margin: .4rem 0; padding: .6rem .8rem; border-radius: 6px; }
+</style>
+</head>
+<body>
+<h1>Watch catalog</h1>
+<p>A minimal demo application for the devsecops pipeline. Nothing here is
+connected to any real streaming service.</p>
+<ul id="list"></ul>
+<script>
+  async function load() {
+    const res = await fetch("/api/catalog");
+    const data = await res.json();
+    const list = document.getElementById("list");
+    for (const item of data.items) {
+      const li = document.createElement("li");
+      li.textContent = `${item.title} (${item.year}) — ${item.genre}, rating ${item.rating}`;
+      list.appendChild(li);
+    }
+  }
+  void load();
+</script>
+</body>
+</html>
