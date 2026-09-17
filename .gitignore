@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+coverage/
+
+# Swarm working data (never committed)
+.swarm/
+
+# Secrets and local config
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+
+# Logs and reports
+*.log
+reports/
+
+# OS noise
+.DS_Store
+Thumbs.db
