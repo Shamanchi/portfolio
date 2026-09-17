@@ -1,0 +1,21 @@
+{
+  "name": "p05-docker-jenkins-k8s",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Model a Jenkins declarative pipeline for a containerized app and render Kubernetes manifests for the deployment.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p .",
+    "test": "node --test \"tests/**/*.test.ts\"",
+    "verify": "npm run typecheck && npm test",
+    "cli": "node src/cli.ts",
+    "check": "node src/cli.ts --check"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.3",
+    "typescript": "^7.0.2"
+  }
+}
