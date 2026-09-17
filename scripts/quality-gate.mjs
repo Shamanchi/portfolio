@@ -20,7 +20,15 @@ if (!MODES.has(mode)) {
 
 const npmCmd = process.platform === "win32" ? "npm.cmd" : "npm";
 
-function run(cmd, args, cwd) {
+function run(cmd, args, cwd, useShell = process.platform === "win32") {
+  if (useShell && process.platform === "win32") {
+    const comSpec = process.env.ComSpec ?? "cmd.exe";
+    execFileSync(comSpec, ["/d", "/s", "/c", [cmd, ...args].join(" ")], {
+      cwd,
+      stdio: "inherit",
+    });
+    return;
+  }
   execFileSync(cmd, args, { cwd, stdio: "inherit" });
 }
 
@@ -96,7 +104,7 @@ function main() {
   if (mode === "all" || mode === "secrets") {
     console.log("quality gate: secrets scan");
     try {
-      run(process.execPath, [join(root, "scripts", "scan-secrets.mjs")], root);
+      run(process.execPath, [join(root, "scripts", "scan-secrets.mjs")], root, false);
     } catch {
       failed = true;
     }
