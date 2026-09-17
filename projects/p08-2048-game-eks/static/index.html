@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>2048</title>
+<style>
+  body { font-family: sans-serif; background: #faf8ef; text-align: center; }
+  .score { font-size: 1.2rem; margin: 1rem 0; }
+  .grid { display: inline-grid; grid-template-columns: repeat(4, 96px); gap: 8px;
+          background: #bbada0; padding: 8px; border-radius: 8px; }
+  .cell { width: 96px; height: 96px; line-height: 96px; font-size: 1.8rem;
+          background: #cdc1b4; border-radius: 6px; }
+  .cell.t2    { background:#eee4da; } .cell.t4   { background:#ede0c8; }
+  .cell.t8    { background:#f2b179; color:#f9f6f2; } .cell.t16 { background:#f59563; color:#f9f6f2; }
+  .cell.t32   { background:#f67c5f; color:#f9f6f2; } .cell.t64 { background:#f65e3b; color:#f9f6f2; }
+  .cell.t128  { background:#edcf72; color:#f9f6f2; } .cell.t256 { background:#edcc61; color:#f9f6f2; }
+  .cell.t512  { background:#edc850; color:#f9f6f2; } .cell.t1024 { background:#edc53f; color:#f9f6f2; }
+  .cell.t2048 { background:#edc22e; color:#f9f6f2; }
+</style>
+</head>
+<body>
+<h1>2048</h1>
+<div class="score">score: <span id="score">0</span></div>
+<div id="board" class="grid"></div>
+<p id="message"></p>
+
+<script>
+  function draw(state) {
+    const board = document.getElementById("board");
+    board.replaceChildren();
+    for (const row of state.grid) {
+      for (const value of row) {
+        const cell = document.createElement("div");
+        cell.className = "cell" + (value ? " t" + value : "");
+        cell.textContent = value || "";
+        board.appendChild(cell);
+      }
+    }
+    document.getElementById("score").textContent = String(state.score);
+    const message = document.getElementById("message");
+    if (state.over) {
+      message.textContent = "game over";
+    } else if (state.won) {
+      message.textContent = "you win - keep playing";
+    } else {
+      message.textContent = "arrows or wasd";
+    }
+  }
+
+  async function refresh() {
+    const res = await fetch("/api/state");
+    draw(await res.json());
+  }
+
+  async function move(direction) {
+    const res = await fetch("/api/move", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ direction }),
+    });
+    const state = await res.json();
+    if (state.error) return;
+    draw(state);
+  }
+
+  const keys = {
+    ArrowLeft: "left", ArrowRight: "right",
+    ArrowUp: "up", ArrowDown: "down",
+    a: "left", d: "right", w: "up", s: "down",
+  };
+
+  window.addEventListener("keydown", (event) => {
+    const direction = keys[event.key];
+    if (direction) {
+      event.preventDefault();
+      void move(direction);
+    }
+  });
+
+  void refresh();
+</script>
+</body>
+</html>
