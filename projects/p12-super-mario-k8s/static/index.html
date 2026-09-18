@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>runner game - Kubernetes demo</title>
+    <style>
+      body { font-family: monospace; background: #101418; color: #d7e3f4; margin: 2rem; }
+      pre { background: #000; padding: 1rem; border: 1px solid #2a3440; }
+      button { padding: 0.5rem 1rem; font-family: inherit; cursor: pointer; }
+    </style>
+  </head>
+  <body>
+    <h1>runner game (demo)</h1>
+    <p>Headless replay served by this pod. Seed 7, 60 frames, auto-jump bot.</p>
+    <button id="replay">Replay</button>
+    <pre id="out">loading…</pre>
+    <script>
+      const out = document.getElementById("out");
+      const replay = document.getElementById("replay");
+      let frames = [];
+      let index = 0;
+      let timer = null;
+
+      function draw() {
+        const f = frames[index] || frames[frames.length - 1];
+        out.textContent = [
+          "score: " + f.score + "  frame: " + f.frame + "  over: " + f.over,
+          "player y: " + f.player.y + "  obstacles: " + f.obstacles.length,
+        ].join("\n");
+      }
+
+      function step() {
+        if (index >= frames.length - 1) {
+          clearInterval(timer);
+          timer = null;
+          draw();
+          return;
+        }
+        index += 1;
+        draw();
+      }
+
+      function play() {
+        index = 0;
+        draw();
+        if (timer) clearInterval(timer);
+        timer = setInterval(step, 60);
+      }
+
+      async function load() {
+        const res = await fetch("/api/sim?frames=60&seed=7");
+        const data = await res.json();
+        frames = data.frames;
+        play();
+      }
+
+      replay.addEventListener("click", play);
+      load();
+    </script>
+  </body>
+</html>
