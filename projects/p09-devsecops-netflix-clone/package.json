@@ -13,6 +13,7 @@
     "verify": "npm run typecheck && npm test",
     "cli": "node src/cli.ts",
     "check": "node src/cli.ts --check",
+    "gate": "npm run verify && npm run check",
     "audit": "npm audit --audit-level=high",
     "serve": "node src/cli.ts --serve 8080"
   },
