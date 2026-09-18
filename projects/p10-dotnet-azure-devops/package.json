@@ -1,0 +1,21 @@
+{
+  "name": "p10-dotnet-azure-devops",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Plan a .NET build and release on Azure DevOps: project model, csproj checker and an approval-gated azure-pipelines.yml renderer.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p .",
+    "test": "node --test \"tests/**/*.test.ts\"",
+    "verify": "npm run typecheck && npm test",
+    "cli": "node src/cli.ts",
+    "check": "node src/cli.ts --check"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.1",
+    "typescript": "^7.0.2"
+  }
+}
