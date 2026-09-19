@@ -1,0 +1,4 @@
+services:
+  verify:
+    build: .
+    command: ["sh", "-c", "npm run verify && npm run check"]

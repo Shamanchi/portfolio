@@ -1,0 +1,21 @@
+﻿{
+    "version":  "1.0.0",
+    "name":  "p21-aws-codepipeline",
+    "scripts":  {
+                    "typecheck":  "tsc --noEmit -p .",
+                    "check":  "node src/cli.ts --check",
+                    "gate":  "npm run verify \u0026\u0026 npm run check",
+                    "cli":  "node src/cli.ts",
+                    "test":  "node --test \"tests/**/*.test.ts\"",
+                    "verify":  "npm run typecheck \u0026\u0026 npm test"
+                },
+    "devDependencies":  {
+                            "@types/node":  "^22.20.3",
+                            "typescript":  "^7.0.2"
+                        },
+    "type":  "module",
+    "engines":  {
+                    "node":  "\u003e=24"
+                },
+    "private":  true
+}
