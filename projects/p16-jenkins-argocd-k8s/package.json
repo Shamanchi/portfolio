@@ -1,0 +1,22 @@
+{
+  "name": "p16-jenkins-argocd-k8s",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Original GitOps delivery demo: ArgoCD Application rendering, a Jenkinsfile that updates the gitops repo and a drift-based sync decision engine.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p .",
+    "test": "node --test \"tests/**/*.test.ts\"",
+    "verify": "npm run typecheck && npm test",
+    "cli": "node src/cli.ts",
+    "check": "node src/cli.ts --check",
+    "gate": "npm run verify && npm run check"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.4",
+    "typescript": "^7.0.2"
+  }
+}
