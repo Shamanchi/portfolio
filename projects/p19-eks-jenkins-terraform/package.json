@@ -1,0 +1,22 @@
+{
+  "name": "p19-eks-jenkins-terraform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Original Terraform demo for an EKS cluster plus Jenkins: a stack renderer, an apply-plan simulator and a tf balance checker.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p .",
+    "test": "node --test \"tests/**/*.test.ts\"",
+    "verify": "npm run typecheck && npm test",
+    "cli": "node src/cli.ts",
+    "check": "node src/cli.ts --check",
+    "gate": "npm run verify && npm run check"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.4",
+    "typescript": "^7.0.2"
+  }
+}
