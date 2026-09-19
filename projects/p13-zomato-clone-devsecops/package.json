@@ -1,0 +1,24 @@
+{
+  "name": "p13-zomato-clone-devsecops",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Original food-delivery demo: dish catalog with order validation, a lightweight SAST scanner, an image-scanning GitHub Actions workflow and a containerized HTTP demo.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p .",
+    "test": "node --test \"tests/**/*.test.ts\"",
+    "verify": "npm run typecheck && npm test",
+    "cli": "node src/cli.ts",
+    "check": "node src/cli.ts --check",
+    "gate": "npm run verify && npm run check",
+    "audit": "npm audit --audit-level=high",
+    "serve": "node src/cli.ts --serve 8080"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.4",
+    "typescript": "^7.0.2"
+  }
+}

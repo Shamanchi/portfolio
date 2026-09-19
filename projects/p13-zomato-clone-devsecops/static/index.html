@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>food catalog demo</title>
+    <style>
+      body { font-family: system-ui, sans-serif; background: #fdf6ec; color: #2b2118; margin: 2rem; }
+      th, td { padding: 0.4rem 0.8rem; border-bottom: 1px solid #ddd; text-align: left; }
+      .out { margin-top: 1rem; font-family: monospace; white-space: pre; }
+      button { padding: 0.4rem 0.8rem; cursor: pointer; }
+    </style>
+  </head>
+  <body>
+    <h1>food catalog demo</h1>
+    <table id="menu"></table>
+    <p>
+      <label>quantity <input id="qty" type="number" min="1" max="20" value="1" /></label>
+    </p>
+    <button id="order">Order selected</button>
+    <div class="out" id="out"></div>
+    <script>
+      const table = document.getElementById("menu");
+      const out = document.getElementById("out");
+
+      fetch("/api/menu")
+        .then((res) => res.json())
+        .then((data) => {
+          table.innerHTML = "<tr><th>id</th><th>category</th><th>price</th><th>stock</th></tr>" +
+            data.items.map((item) =>
+              "<tr><td>" + item.id + "</td><td>" + item.category + "</td><td>" + item.price.toFixed(2) + "</td><td>" + item.stock + "</td></tr>"
+            ).join("");
+        });
+
+      document.getElementById("order").addEventListener("click", async () => {
+        const qty = Number(document.getElementById("qty").value || "1");
+        const res = await fetch("/api/order", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ order: [{ id: "chicken-biryani", quantity: qty }] }),
+        });
+        const data = await res.json();
+        out.textContent = res.ok
+          ? "order accepted, total " + data.total
+          : "order rejected: " + data.error;
+      });
+    </script>
+  </body>
+</html>
